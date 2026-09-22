@@ -15,5 +15,5 @@ jobs:
       - name: Say Hello
         run: echo "CI Pipeline Started"
 
-      - name: Check Java
-        run: python -version
+      - name: Check Node
+        run: node --version
