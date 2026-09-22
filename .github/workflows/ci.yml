@@ -5,16 +5,24 @@ on:
     branches:
       - main
 
+  pull_request:
+    branches:
+      - main
+
+env:
+  APP_NAME: pulseops
+
 jobs:
 
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Build
-        run: echo "Building application"
+        run: echo "Building $APP_NAME"
 
 
   test:
@@ -22,10 +30,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Test
-        run: echo "Running tests"
+        run: echo "Testing $APP_NAME"
 
 
   deploy:
@@ -34,10 +43,14 @@ jobs:
 
     steps:
       - name: Deploy
-        run: echo "Deploying application"
+        run: echo "Deploying $APP_NAME"
 
 # job dependencies:
 #   test:
 #     needs: build
 
 # we will write it like this to ensure that the test job only runs after the build job has completed successfully. This way, we can maintain a proper CI/CD pipeline where the build must pass before any tests are executed.
+
+# run  → execute my command
+
+# uses → use an existing action
