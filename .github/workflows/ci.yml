@@ -1,19 +1,25 @@
-name: My First CI
+name: CI
 
 on:
   push:
-  pull_request:
 
 jobs:
+
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Say Hello
-        run: echo "CI Pipeline Started"
+      - name: Build
+        run: echo "Building application"
 
-      - name: Check Node
-        run: node --version
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Test
+        run: echo "Running tests"
