@@ -1,0 +1,104 @@
+/* ===========================================================
+   PlacementPro Admin — auth.css
+   Login and Forgot Password pages
+   =========================================================== */
+
+.auth-page { display: flex; min-height: 100vh; }
+
+/* ===================== LEFT VISUAL PANEL ===================== */
+.auth-visual {
+  flex: 1.1;
+  background: linear-gradient(150deg, var(--sidebar) 0%, var(--dark-blue) 100%);
+  color: #fff;
+  padding: 44px 52px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative; overflow: hidden;
+}
+.auth-visual::before {
+  content: ''; position: absolute; width: 420px; height: 420px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(37,99,235,0.35), transparent 70%);
+  top: -140px; right: -140px;
+}
+.auth-visual::after {
+  content: ''; position: absolute; width: 320px; height: 320px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(37,99,235,0.2), transparent 70%);
+  bottom: -120px; left: -80px;
+}
+.auth-visual-brand { display: flex; align-items: center; gap: 11px; font-size: 21px; font-weight: 700; position: relative; z-index: 1; }
+.auth-visual-brand i { color: var(--primary); font-size: 24px; }
+
+.auth-visual-content { max-width: 460px; position: relative; z-index: 1; }
+.auth-visual-content h1 { font-size: 30px; font-weight: 700; line-height: 1.35; letter-spacing: -0.4px; }
+.auth-visual-content p { font-size: 14px; color: #CBD5E1; margin-top: 16px; line-height: 1.7; }
+
+.auth-stat-row { display: flex; gap: 34px; margin-top: 32px; }
+.auth-stat h3 { font-size: 24px; font-weight: 800; }
+.auth-stat span { font-size: 12px; color: #94A3B8; font-weight: 500; }
+
+.auth-visual-footer { font-size: 11.5px; color: #64748B; position: relative; z-index: 1; }
+
+/* ===================== RIGHT FORM PANEL ===================== */
+.auth-form-side {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 40px 32px; background: var(--background); position: relative;
+}
+.auth-box { width: 100%; max-width: 400px; position: relative; }
+
+.back-to-login {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 600; color: var(--secondary-text);
+  margin-bottom: 22px; transition: color var(--transition);
+}
+.back-to-login:hover { color: var(--primary); }
+
+.auth-box-header { text-align: center; margin-bottom: 26px; }
+.auth-icon {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(37,99,235,0.1); color: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; margin: 0 auto 16px;
+}
+.auth-box-header h2 { font-size: 21px; font-weight: 700; }
+.auth-box-header p { font-size: 13px; color: var(--secondary-text); margin-top: 6px; }
+
+.demo-hint {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: rgba(37,99,235,0.06); border: 1px solid rgba(37,99,235,0.2);
+  border-radius: var(--radius-sm); padding: 12px 14px; margin-bottom: 22px;
+  font-size: 12px; color: var(--dark-blue); line-height: 1.6;
+}
+.demo-hint i { margin-top: 2px; color: var(--primary); }
+
+.auth-options-row {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px; margin-top: -4px;
+}
+.forgot-link { font-size: 12.5px; color: var(--primary); font-weight: 600; }
+.forgot-link:hover { text-decoration: underline; }
+
+.auth-footer-link { text-align: center; font-size: 13px; color: var(--secondary-text); margin-top: 22px; }
+.auth-footer-link a { color: var(--primary); font-weight: 600; }
+.auth-footer-link a:hover { text-decoration: underline; }
+
+/* ===================== SUCCESS STATE (forgot password) ===================== */
+.success-state { text-align: center; padding: 8px 0; }
+.success-icon {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--success-bg); color: var(--success);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; margin: 0 auto 18px;
+  animation: successPop 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes successPop { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.success-state h3 { font-size: 18px; font-weight: 700; }
+.success-state p { font-size: 13.5px; color: var(--secondary-text); margin: 10px 0 22px; line-height: 1.6; }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 980px) {
+  .auth-visual { display: none; }
+  .auth-form-side { flex: 1; }
+}
+@media (max-width: 480px) {
+  .auth-form-side { padding: 28px 18px; }
+  .auth-stat-row { gap: 20px; }
+}

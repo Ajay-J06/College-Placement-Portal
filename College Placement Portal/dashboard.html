@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard | College Placement Portal</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link rel="stylesheet" href="./style.css" />
+<link rel="stylesheet" href="./auth.css" />
+<link rel="stylesheet" href="./dashboard.css" />
+<link rel="stylesheet" href="./students.css" />
+</head>
+<body>
+
+<div class="page-loader" id="pageLoader">
+  <div class="loader-ring"></div>
+  <div class="loader-text">Loading Dashboard...</div>
+</div>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="app-layout">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <i class="fa-solid fa-graduation-cap"></i>
+      <span>PlaceMentPro</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="dashboard.html" data-page="dashboard.html" class="active"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <a href="students.html" data-page="students.html"><i class="fa-solid fa-user-graduate"></i><span>Students</span></a>
+      <a href="#" data-page="companies.html"><i class="fa-solid fa-building"></i><span>Companies</span></a>
+      <a href="#" data-page="jobs.html"><i class="fa-solid fa-briefcase"></i><span>Jobs</span></a>
+
+      <div class="nav-section-label">Activity</div>
+      <a href="#" data-page="applications.html"><i class="fa-solid fa-file-lines"></i><span>Applications</span></a>
+      <a href="#" data-page="interviews.html"><i class="fa-solid fa-calendar-check"></i><span>Interviews</span></a>
+      <a href="verify-student.html" data-page="verify-student.html"><i class="fa-solid fa-user-check"></i><span>Verify Students</span></a>
+
+      <div class="nav-section-label">Insights</div>
+      <a href="#" data-page="statistics.html"><i class="fa-solid fa-chart-pie"></i><span>Placement Statistics</span></a>
+      <a href="#" data-page="reports.html"><i class="fa-solid fa-file-export"></i><span>Reports</span></a>
+      <a href="#" data-page="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" data-logout><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+    </div>
+  </aside>
+
+  <div class="main-content">
+
+    <!-- ============ NAVBAR ============ -->
+    <header class="navbar">
+      <div class="navbar-left">
+        <button class="sidebar-toggle-btn" id="sidebarToggleBtn"><i class="fa-solid fa-bars"></i></button>
+        <div class="navbar-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search students, companies, jobs..." id="globalSearchInput" />
+        </div>
+      </div>
+      <div class="navbar-right">
+        <i class="fa-regular fa-moon icon-btn" id="darkModeToggle" title="Toggle dark mode"></i>
+
+        <div style="position:relative;">
+          <div class="icon-btn" data-dropdown-trigger="messagesDropdown" title="Messages">
+            <i class="fa-regular fa-envelope"></i><span class="badge-dot"></span>
+          </div>
+          <div class="dropdown-menu" id="messagesDropdown" style="width:300px;">
+            <div class="dropdown-header">Messages</div>
+            <a href="#"><div class="notif-icon" style="background:var(--info-bg);color:var(--info);"><i class="fa-solid fa-user"></i></div><div><div class="dropdown-item-title">Priya Sharma</div><div class="dropdown-item-sub">Sent you the offer letter draft</div></div></a>
+            <a href="#"><div class="notif-icon" style="background:var(--success-bg);color:var(--success);"><i class="fa-solid fa-user"></i></div><div><div class="dropdown-item-title">TCS HR Team</div><div class="dropdown-item-sub">Confirmed interview slots for Fri</div></div></a>
+            <div class="divider"></div>
+            <a href="#" style="justify-content:center;color:var(--primary);font-weight:700;">View all messages</a>
+          </div>
+        </div>
+
+        <div style="position:relative;">
+          <div class="icon-btn" data-dropdown-trigger="notifDropdown" title="Notifications">
+            <i class="fa-solid fa-bell"></i><span class="badge-dot"></span>
+          </div>
+          <div class="dropdown-menu" id="notifDropdown" style="width:320px;">
+            <div class="dropdown-header">Notifications</div>
+            <a href="#" class="notif-item"><div class="notif-icon" style="background:var(--success-bg);color:var(--success);"><i class="fa-solid fa-check"></i></div><div><div class="dropdown-item-title">12 students verified</div><div class="dropdown-item-sub">2 minutes ago</div></div></a>
+            <a href="#" class="notif-item"><div class="notif-icon" style="background:var(--info-bg);color:var(--info);"><i class="fa-solid fa-building"></i></div><div><div class="dropdown-item-title">Zoho added a new job drive</div><div class="dropdown-item-sub">1 hour ago</div></div></a>
+            <a href="#" class="notif-item"><div class="notif-icon" style="background:var(--warning-bg);color:var(--warning);"><i class="fa-solid fa-triangle-exclamation"></i></div><div><div class="dropdown-item-title">5 resumes pending review</div><div class="dropdown-item-sub">3 hours ago</div></div></a>
+            <div class="divider"></div>
+            <a href="#" style="justify-content:center;color:var(--primary);font-weight:700;">View all notifications</a>
+          </div>
+        </div>
+
+        <div style="position:relative;">
+          <div class="navbar-profile" data-dropdown-trigger="profileDropdown">
+            <img src="https://i.pravatar.cc/80?img=12" alt="Admin" />
+            <div>
+              <div class="profile-name" id="navProfileName">Rajesh Kumar</div>
+              <div class="profile-role">Placement Officer</div>
+            </div>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="dropdown-menu" id="profileDropdown">
+            <a href="#"><i class="fa-regular fa-user"></i> My Profile</a>
+            <a href="#"><i class="fa-solid fa-gear"></i> Account Settings</a>
+            <a href="#"><i class="fa-regular fa-circle-question"></i> Help &amp; Support</a>
+            <div class="divider"></div>
+            <button data-logout><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ PAGE BODY ============ -->
+    <main class="page-body">
+
+      <div class="page-title-row">
+        <div>
+          <h1>Welcome back, Rajesh 👋</h1>
+          <p class="subtitle">Here's what's happening with your placement drive today.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-outline"><i class="fa-solid fa-file-export"></i> Export Report</button>
+          <a href="add-student.html" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Student</a>
+        </div>
+      </div>
+
+      <!-- ===== Stat Cards ===== -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon blue"><i class="fa-solid fa-user-graduate"></i></div>
+          <div class="stat-value" data-counter="542">0</div>
+          <div class="stat-label">Total Students</div>
+          <div class="stat-trend up"><i class="fa-solid fa-arrow-up"></i> 4.2% this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon indigo"><i class="fa-solid fa-building"></i></div>
+          <div class="stat-value" data-counter="38">0</div>
+          <div class="stat-label">Total Companies</div>
+          <div class="stat-trend up"><i class="fa-solid fa-arrow-up"></i> 3 new this week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon cyan"><i class="fa-solid fa-briefcase"></i></div>
+          <div class="stat-value" data-counter="17">0</div>
+          <div class="stat-label">Active Jobs</div>
+          <div class="stat-trend up"><i class="fa-solid fa-arrow-up"></i> 5 closing soon</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon orange"><i class="fa-solid fa-file-lines"></i></div>
+          <div class="stat-value" data-counter="1248">0</div>
+          <div class="stat-label">Applications</div>
+          <div class="stat-trend up"><i class="fa-solid fa-arrow-up"></i> 12.8% this week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green"><i class="fa-solid fa-calendar-check"></i></div>
+          <div class="stat-value" data-counter="23">0</div>
+          <div class="stat-label">Upcoming Interviews</div>
+          <div class="stat-trend up"><i class="fa-solid fa-arrow-up"></i> 6 this week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon red"><i class="fa-solid fa-chart-simple"></i></div>
+          <div class="stat-value" data-counter="84" data-suffix="%">0</div>
+          <div class="stat-label">Placement Rate</div>
+          <div class="stat-trend up"><i class="fa-solid fa-arrow-up"></i> 2.1% vs last year</div>
+        </div>
+      </div>
+
+      <!-- ===== Charts Row 1 ===== -->
+      <div class="charts-grid">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3>Students by Department</h3>
+              <p>Distribution across all active departments</p>
+            </div>
+            <button class="btn btn-ghost btn-sm"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+          </div>
+          <div class="chart-canvas-wrap">
+            <canvas id="deptChart" style="width:100%;height:260px;"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3>Placement Statistics</h3>
+              <p>Current academic year</p>
+            </div>
+          </div>
+          <div class="chart-canvas-wrap" style="display:flex;justify-content:center;">
+            <canvas id="placementDonut" style="width:220px;height:220px;"></canvas>
+          </div>
+          <div class="chart-legend">
+            <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#2563EB;"></span> Placed (456)</div>
+            <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#0891B2;"></span> In Process (58)</div>
+            <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#E2E8F0;"></span> Not Placed (28)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Charts Row 2 ===== -->
+      <div class="charts-grid-2">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3>Monthly Applications</h3>
+              <p>Applications submitted per month</p>
+            </div>
+          </div>
+          <div class="chart-canvas-wrap">
+            <canvas id="monthlyChart" style="width:100%;height:220px;"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3>Company-wise Hiring</h3>
+              <p>Top recruiters this year</p>
+            </div>
+          </div>
+          <div class="chart-canvas-wrap">
+            <canvas id="companyHiringChart" style="width:100%;height:220px;"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Bottom Grid ===== -->
+      <div class="bottom-grid">
+        <div class="card">
+          <div class="card-header">
+            <h3>Recent Activities</h3>
+            <a href="#" class="text-muted" style="font-size:12.5px;">View all</a>
+          </div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <div class="activity-icon" style="background:var(--success-bg);color:var(--success);"><i class="fa-solid fa-user-check"></i></div>
+              <div><div class="activity-text"><strong>Ananya Reddy</strong> was verified for placement eligibility</div><div class="activity-time">10 minutes ago</div></div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon" style="background:rgba(37,99,235,0.1);color:var(--primary);"><i class="fa-solid fa-briefcase"></i></div>
+              <div><div class="activity-text"><strong>Infosys</strong> posted a new job opening for SDE-1</div><div class="activity-time">42 minutes ago</div></div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon" style="background:var(--warning-bg);color:var(--warning);"><i class="fa-solid fa-file-arrow-up"></i></div>
+              <div><div class="activity-text"><strong>Karthik Iyer</strong> uploaded an updated resume</div><div class="activity-time">1 hour ago</div></div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon" style="background:var(--info-bg);color:var(--info);"><i class="fa-solid fa-calendar-plus"></i></div>
+              <div><div class="activity-text"><strong>Wipro</strong> scheduled interviews for 18 students</div><div class="activity-time">2 hours ago</div></div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon" style="background:var(--danger-bg);color:var(--danger);"><i class="fa-solid fa-user-xmark"></i></div>
+              <div><div class="activity-text"><strong>Suresh Babu's</strong> profile was rejected — incomplete documents</div><div class="activity-time">5 hours ago</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Recent Companies</h3>
+            <a href="#" class="text-muted" style="font-size:12.5px;">View all</a>
+          </div>
+          <div class="company-list">
+            <div class="company-item">
+              <div class="company-logo">TCS</div>
+              <div><div class="company-name">Tata Consultancy Services</div><div class="company-sub">62 students hired · IT Services</div></div>
+            </div>
+            <div class="company-item">
+              <div class="company-logo">IN</div>
+              <div><div class="company-name">Infosys Ltd.</div><div class="company-sub">54 students hired · IT Services</div></div>
+            </div>
+            <div class="company-item">
+              <div class="company-logo">WI</div>
+              <div><div class="company-name">Wipro Technologies</div><div class="company-sub">41 students hired · IT Consulting</div></div>
+            </div>
+            <div class="company-item">
+              <div class="company-logo">ZO</div>
+              <div><div class="company-name">Zoho Corporation</div><div class="company-sub">Recruiting now · Product</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-grid">
+        <div class="card">
+          <div class="card-header">
+            <h3>Upcoming Interviews</h3>
+            <a href="#" class="text-muted" style="font-size:12.5px;">View all</a>
+          </div>
+          <div class="interview-list">
+            <div class="interview-item">
+              <div class="interview-date"><div class="day">08</div><div class="mon">Aug</div></div>
+              <div><div class="interview-title">TCS — Technical Round 2</div><div class="interview-sub">14 candidates · 10:00 AM · Seminar Hall A</div></div>
+            </div>
+            <div class="interview-item">
+              <div class="interview-date"><div class="day">10</div><div class="mon">Aug</div></div>
+              <div><div class="interview-title">Infosys — HR Round</div><div class="interview-sub">9 candidates · 11:30 AM · Conference Room</div></div>
+            </div>
+            <div class="interview-item">
+              <div class="interview-date"><div class="day">12</div><div class="mon">Aug</div></div>
+              <div><div class="interview-title">Zoho — Coding Assessment</div><div class="interview-sub">28 candidates · 9:00 AM · Computer Lab 3</div></div>
+            </div>
+            <div class="interview-item">
+              <div class="interview-date"><div class="day">14</div><div class="mon">Aug</div></div>
+              <div><div class="interview-title">Wipro — Final Interview</div><div class="interview-sub">6 candidates · 2:00 PM · Seminar Hall B</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Latest Notifications</h3>
+            <a href="#" class="text-muted" style="font-size:12.5px;">Mark all read</a>
+          </div>
+          <div class="notif-list">
+            <div class="notif-list-item">
+              <div class="notif-dot-icon" style="background:var(--success-bg);color:var(--success);"><i class="fa-solid fa-check"></i></div>
+              <div><div class="activity-text">Placement drive for <strong>CSE 2026</strong> batch completed successfully</div><div class="activity-time">Today, 9:14 AM</div></div>
+            </div>
+            <div class="notif-list-item">
+              <div class="notif-dot-icon" style="background:var(--warning-bg);color:var(--warning);"><i class="fa-solid fa-triangle-exclamation"></i></div>
+              <div><div class="activity-text">5 student profiles are pending document verification</div><div class="activity-time">Today, 8:02 AM</div></div>
+            </div>
+            <div class="notif-list-item">
+              <div class="notif-dot-icon" style="background:var(--info-bg);color:var(--info);"><i class="fa-solid fa-bullhorn"></i></div>
+              <div><div class="activity-text">New job posting from <strong>Cognizant</strong> awaiting approval</div><div class="activity-time">Yesterday, 6:40 PM</div></div>
+            </div>
+            <div class="notif-list-item">
+              <div class="notif-dot-icon" style="background:rgba(37,99,235,0.1);color:var(--primary);"><i class="fa-solid fa-users"></i></div>
+              <div><div class="activity-text">32 new student registrations this week</div><div class="activity-time">Yesterday, 3:15 PM</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Quick Actions ===== -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Quick Actions</h3>
+        </div>
+        <div class="card-body">
+          <div class="quick-actions-grid">
+            <a href="add-student.html" class="quick-action-card">
+              <div class="qa-icon"><i class="fa-solid fa-user-plus"></i></div>
+              <span>Add Student</span>
+            </a>
+            <a href="verify-student.html" class="quick-action-card">
+              <div class="qa-icon"><i class="fa-solid fa-user-check"></i></div>
+              <span>Verify Students</span>
+            </a>
+            <a href="students.html" class="quick-action-card">
+              <div class="qa-icon"><i class="fa-solid fa-file-export"></i></div>
+              <span>Export Student List</span>
+            </a>
+            <a href="#" class="quick-action-card">
+              <div class="qa-icon"><i class="fa-solid fa-calendar-plus"></i></div>
+              <span>Schedule Interview</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script src="dashboard.js"></script>
+<script src="students.js"></script>
+<script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Verify Students | College Placement Portal</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link rel="stylesheet" href="./style.css" />
+<link rel="stylesheet" href="./auth.css" />
+<link rel="stylesheet" href="./dashboard.css" />
+<link rel="stylesheet" href="./students.css" />
+</head>
+<body>
+
+<div class="page-loader" id="pageLoader"><div class="loader-ring"></div><div class="loader-text">Loading Verification Queue...</div></div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="app-layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-brand"><i class="fa-solid fa-graduation-cap"></i><span>PlaceMentPro</span></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="dashboard.html" data-page="dashboard.html"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <a href="students.html" data-page="students.html"><i class="fa-solid fa-user-graduate"></i><span>Students</span></a>
+      <a href="#" data-page="companies.html"><i class="fa-solid fa-building"></i><span>Companies</span></a>
+      <a href="#" data-page="jobs.html"><i class="fa-solid fa-briefcase"></i><span>Jobs</span></a>
+      <div class="nav-section-label">Activity</div>
+      <a href="#" data-page="applications.html"><i class="fa-solid fa-file-lines"></i><span>Applications</span></a>
+      <a href="#" data-page="interviews.html"><i class="fa-solid fa-calendar-check"></i><span>Interviews</span></a>
+      <a href="verify-student.html" data-page="verify-student.html" class="active"><i class="fa-solid fa-user-check"></i><span>Verify Students</span></a>
+      <div class="nav-section-label">Insights</div>
+      <a href="#" data-page="statistics.html"><i class="fa-solid fa-chart-pie"></i><span>Placement Statistics</span></a>
+      <a href="#" data-page="reports.html"><i class="fa-solid fa-file-export"></i><span>Reports</span></a>
+      <a href="#" data-page="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-footer"><a href="#" data-logout><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a></div>
+  </aside>
+
+  <div class="main-content">
+    <header class="navbar">
+      <div class="navbar-left">
+        <button class="sidebar-toggle-btn" id="sidebarToggleBtn"><i class="fa-solid fa-bars"></i></button>
+        <div class="navbar-search"><i class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="Search students, companies, jobs..." /></div>
+      </div>
+      <div class="navbar-right">
+        <i class="fa-regular fa-moon icon-btn" id="darkModeToggle"></i>
+        <div style="position:relative;">
+          <div class="navbar-profile" data-dropdown-trigger="profileDropdown">
+            <img src="https://i.pravatar.cc/80?img=12" alt="Admin" />
+            <div><div class="profile-name" id="navProfileName">Rajesh Kumar</div><div class="profile-role">Placement Officer</div></div>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="dropdown-menu" id="profileDropdown">
+            <a href="#"><i class="fa-regular fa-user"></i> My Profile</a>
+            <div class="divider"></div>
+            <button data-logout><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-body">
+      <div class="breadcrumb"><a href="dashboard.html">Dashboard</a><i class="fa-solid fa-chevron-right"></i><span class="current">Verify Students</span></div>
+      <div class="page-title-row">
+        <div><h1>Verify Students</h1><p class="subtitle">Review student profiles and approve or reject placement eligibility.</p></div>
+      </div>
+
+      <div class="mini-stats-grid">
+        <div class="mini-stat-card"><div class="mini-stat-icon" style="background:var(--warning-bg);color:var(--warning);"><i class="fa-solid fa-hourglass-half"></i></div><div><h3 id="countPending">0</h3><span>Pending Verification</span></div></div>
+        <div class="mini-stat-card"><div class="mini-stat-icon" style="background:var(--success-bg);color:var(--success);"><i class="fa-solid fa-circle-check"></i></div><div><h3 id="countVerified">0</h3><span>Verified Students</span></div></div>
+        <div class="mini-stat-card"><div class="mini-stat-icon" style="background:var(--danger-bg);color:var(--danger);"><i class="fa-solid fa-circle-xmark"></i></div><div><h3 id="countRejected">0</h3><span>Rejected Students</span></div></div>
+        <div class="mini-stat-card"><div class="mini-stat-icon" style="background:rgba(37,99,235,0.1);color:var(--primary);"><i class="fa-solid fa-users"></i></div><div><h3 id="countTotal">0</h3><span>Total Students</span></div></div>
+      </div>
+
+      <div class="card">
+        <div class="list-toolbar">
+          <div class="d-flex gap-1">
+            <button class="btn btn-sm btn-primary verify-tab-btn active" data-tab="pending">Pending</button>
+            <button class="btn btn-sm btn-outline verify-tab-btn" data-tab="verified">Verified</button>
+            <button class="btn btn-sm btn-outline verify-tab-btn" data-tab="rejected">Rejected</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Resume</th>
+                <th>CGPA</th>
+                <th>Eligibility</th>
+                <th>Verification Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="verifyTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Remarks Modal -->
+<div class="modal-overlay" id="remarksModalOverlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 id="remarksModalTitle">Verify Student</h3>
+      <div class="modal-close" data-modal-close><i class="fa-solid fa-xmark"></i></div>
+    </div>
+    <div class="modal-body">
+      <div class="form-group" style="margin-bottom:0;">
+        <label class="form-label" for="remarksTextarea">Remarks (optional)</label>
+        <textarea id="remarksTextarea" class="form-control remarks-textarea" placeholder="Add any notes about this decision..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" data-modal-close>Cancel</button>
+      <button class="btn btn-success" id="remarksSubmitBtn">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Toggle active state for tab buttons (visual)
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('verify-tab-btn')) {
+      document.querySelectorAll('.verify-tab-btn').forEach(b => b.classList.remove('btn-primary'));
+      document.querySelectorAll('.verify-tab-btn').forEach(b => b.classList.add('btn-outline'));
+      e.target.classList.remove('btn-outline');
+      e.target.classList.add('btn-primary');
+    }
+  });
+</script>
+<script src="app.js"></script>
+<script src="dashboard.js"></script>
+<script src="students.js"></script>
+<script src="login.js"></script>
+</body>
+</html>

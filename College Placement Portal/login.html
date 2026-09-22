@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Login | College Placement Portal</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link rel="stylesheet" href="./style.css" />
+<link rel="stylesheet" href="./auth.css" />
+<link rel="stylesheet" href="./dashboard.css" />
+<link rel="stylesheet" href="./students.css" />
+</head>
+<body>
+
+<!-- Page Loader -->
+<div class="page-loader" id="pageLoader">
+  <div class="loader-ring"></div>
+  <div class="loader-text">Loading Placement Portal...</div>
+</div>
+
+<div class="auth-page">
+
+  <!-- Left visual / brand panel -->
+  <div class="auth-visual">
+    <div class="auth-visual-brand">
+      <i class="fa-solid fa-graduation-cap"></i>
+      <span>PlaceMent<span style="color:#93C5FD">Pro</span></span>
+    </div>
+
+    <div class="auth-visual-content">
+      <h1>Manage your entire placement lifecycle from one dashboard.</h1>
+      <p>Track students, companies, job drives and interviews in real time. Built for placement cells that move fast and stay organized.</p>
+
+      <div class="auth-stat-row">
+        <div class="auth-stat"><h3>542</h3><span>Students</span></div>
+        <div class="auth-stat"><h3>38</h3><span>Companies</span></div>
+        <div class="auth-stat"><h3>84%</h3><span>Placement Rate</span></div>
+      </div>
+    </div>
+
+    <div class="auth-visual-footer">&copy; 2026 PlacementPro Admin Console. All rights reserved.</div>
+  </div>
+
+  <!-- Right login form -->
+  <div class="auth-form-side">
+    <div class="auth-box">
+      <div class="auth-box-header">
+        <div class="auth-icon"><i class="fa-solid fa-lock"></i></div>
+        <h2>Welcome back, Admin</h2>
+        <p>Sign in to access the placement management console.</p>
+      </div>
+
+      <div class="demo-hint">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>Demo credentials — Email: <strong>admin@placementpro.edu</strong> &nbsp;Password: <strong>admin123</strong></span>
+      </div>
+
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="loginEmail">Email Address<span class="required">*</span></label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-envelope field-icon"></i>
+            <input type="email" id="loginEmail" class="form-control has-icon" placeholder="admin@placementpro.edu" autocomplete="username" />
+          </div>
+          <div class="form-error" id="loginEmailError"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="loginPassword">Password<span class="required">*</span></label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-key field-icon"></i>
+            <input type="password" id="loginPassword" class="form-control has-icon" placeholder="Enter your password" autocomplete="current-password" style="padding-right:44px;" />
+            <i class="fa-solid fa-eye password-toggle" data-target="loginPassword"></i>
+          </div>
+          <div class="form-error" id="loginPasswordError"></div>
+        </div>
+
+        <div class="auth-options-row">
+          <div class="checkbox-wrap">
+            <input type="checkbox" id="rememberMe" />
+            <label for="rememberMe">Remember me</label>
+          </div>
+          <a href="forgot-password.html" class="forgot-link">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="loginSubmitBtn">
+          <span class="btn-text"><i class="fa-solid fa-right-to-bracket"></i>&nbsp; Sign In</span>
+        </button>
+      </form>
+
+      <div class="auth-footer-link">
+        Need access? <a href="mailto:it-support@placementpro.edu">Contact IT Support</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+<script src="dashboard.js"></script>
+<script src="students.js"></script>
+<script src="login.js"></script>
+</body>
+</html>

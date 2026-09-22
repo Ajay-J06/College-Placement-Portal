@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Add Student | College Placement Portal</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link rel="stylesheet" href="./style.css" />
+<link rel="stylesheet" href="./auth.css" />
+<link rel="stylesheet" href="./dashboard.css" />
+<link rel="stylesheet" href="./students.css" />
+</head>
+<body>
+
+<div class="page-loader" id="pageLoader"><div class="loader-ring"></div><div class="loader-text">Loading Form...</div></div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="app-layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-brand"><i class="fa-solid fa-graduation-cap"></i><span>PlaceMentPro</span></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="dashboard.html" data-page="dashboard.html"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <a href="students.html" data-page="students.html" class="active"><i class="fa-solid fa-user-graduate"></i><span>Students</span></a>
+      <a href="#" data-page="companies.html"><i class="fa-solid fa-building"></i><span>Companies</span></a>
+      <a href="#" data-page="jobs.html"><i class="fa-solid fa-briefcase"></i><span>Jobs</span></a>
+      <div class="nav-section-label">Activity</div>
+      <a href="#" data-page="applications.html"><i class="fa-solid fa-file-lines"></i><span>Applications</span></a>
+      <a href="#" data-page="interviews.html"><i class="fa-solid fa-calendar-check"></i><span>Interviews</span></a>
+      <a href="verify-student.html" data-page="verify-student.html"><i class="fa-solid fa-user-check"></i><span>Verify Students</span></a>
+      <div class="nav-section-label">Insights</div>
+      <a href="#" data-page="statistics.html"><i class="fa-solid fa-chart-pie"></i><span>Placement Statistics</span></a>
+      <a href="#" data-page="reports.html"><i class="fa-solid fa-file-export"></i><span>Reports</span></a>
+      <a href="#" data-page="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-footer"><a href="#" data-logout><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a></div>
+  </aside>
+
+  <div class="main-content">
+    <header class="navbar">
+      <div class="navbar-left">
+        <button class="sidebar-toggle-btn" id="sidebarToggleBtn"><i class="fa-solid fa-bars"></i></button>
+        <div class="navbar-search"><i class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="Search students, companies, jobs..." /></div>
+      </div>
+      <div class="navbar-right">
+        <i class="fa-regular fa-moon icon-btn" id="darkModeToggle"></i>
+        <div style="position:relative;">
+          <div class="navbar-profile" data-dropdown-trigger="profileDropdown">
+            <img src="https://i.pravatar.cc/80?img=12" alt="Admin" />
+            <div><div class="profile-name" id="navProfileName">Rajesh Kumar</div><div class="profile-role">Placement Officer</div></div>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="dropdown-menu" id="profileDropdown">
+            <a href="#"><i class="fa-regular fa-user"></i> My Profile</a>
+            <div class="divider"></div>
+            <button data-logout><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-body">
+      <div class="breadcrumb"><a href="dashboard.html">Dashboard</a><i class="fa-solid fa-chevron-right"></i><a href="students.html">Students</a><i class="fa-solid fa-chevron-right"></i><span class="current">Add Student</span></div>
+      <div class="page-title-row">
+        <div><h1>Add New Student</h1><p class="subtitle">Register a new student profile to the placement portal.</p></div>
+      </div>
+
+      <form id="addStudentForm" novalidate>
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="form-section-title"><i class="fa-solid fa-image"></i> Profile Photo</div>
+            <div class="upload-preview-row mb-3">
+              <div class="upload-preview-circle" id="photoDropZone">
+                <img id="photoPreviewImg" style="display:none;" alt="Preview" />
+                <i class="fa-solid fa-user" id="photoPlaceholderIcon"></i>
+              </div>
+              <div>
+                <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('photoInput').click()"><i class="fa-solid fa-upload"></i> Upload Photo</button>
+                <p class="form-hint">JPG or PNG, up to 2MB. Square image recommended.</p>
+                <input type="file" id="photoInput" accept="image/*" style="display:none;" />
+              </div>
+            </div>
+
+            <div class="form-section-title"><i class="fa-solid fa-id-card"></i> Personal Information</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="studentName">Full Name<span class="required">*</span></label>
+                <input type="text" id="studentName" class="form-control" data-required placeholder="e.g. Ananya Reddy" />
+                <div class="form-error" id="studentNameError"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="studentRegNo">Register Number<span class="required">*</span></label>
+                <input type="text" id="studentRegNo" class="form-control" data-required placeholder="e.g. 21CSE001" />
+                <div class="form-error" id="studentRegNoError"></div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="studentDept">Department<span class="required">*</span></label>
+                <select id="studentDept" class="form-control" data-required>
+                  <option value="">Select department</option>
+                  <option value="CSE">Computer Science (CSE)</option>
+                  <option value="ECE">Electronics &amp; Comm. (ECE)</option>
+                  <option value="MECH">Mechanical (MECH)</option>
+                  <option value="CIVIL">Civil</option>
+                  <option value="EEE">Electrical (EEE)</option>
+                  <option value="IT">Information Technology (IT)</option>
+                </select>
+                <div class="form-error" id="studentDeptError"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="studentYear">Year<span class="required">*</span></label>
+                <select id="studentYear" class="form-control" data-required>
+                  <option value="">Select year</option>
+                  <option value="1st Year">1st Year</option>
+                  <option value="2nd Year">2nd Year</option>
+                  <option value="3rd Year">3rd Year</option>
+                  <option value="4th Year">4th Year</option>
+                </select>
+                <div class="form-error" id="studentYearError"></div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="studentEmail">Email Address<span class="required">*</span></label>
+                <input type="email" id="studentEmail" class="form-control" data-required placeholder="student@college.edu" />
+                <div class="form-error" id="studentEmailError"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="studentPhone">Phone Number<span class="required">*</span></label>
+                <input type="tel" id="studentPhone" class="form-control" data-required placeholder="+91 98765 43210" />
+                <div class="form-error" id="studentPhoneError"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="studentAddress">Address<span class="required">*</span></label>
+              <textarea id="studentAddress" class="form-control" data-required placeholder="Street, City, State"></textarea>
+              <div class="form-error" id="studentAddressError"></div>
+            </div>
+
+            <div class="form-section-title" style="margin-top:8px;"><i class="fa-solid fa-book"></i> Academic Details</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="studentCgpa">CGPA<span class="required">*</span></label>
+                <input type="number" step="0.01" min="0" max="10" id="studentCgpa" class="form-control" data-required placeholder="e.g. 8.75" />
+                <div class="form-error" id="studentCgpaError"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="studentArrears">Arrears</label>
+                <input type="number" min="0" id="studentArrears" class="form-control" placeholder="0" value="0" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="studentSkills">Skills</label>
+              <input type="text" id="studentSkills" class="form-control" placeholder="Comma separated, e.g. React, Node.js, Python" />
+              <div class="form-hint">Separate each skill with a comma.</div>
+            </div>
+
+            <div class="form-section-title" style="margin-top:8px;"><i class="fa-solid fa-file-arrow-up"></i> Resume Upload</div>
+            <div class="file-drop" id="resumeDropZone">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <p>Click or drag &amp; drop resume here (PDF, up to 5MB)</p>
+              <div class="file-drop-filename" id="resumeFileNameDisplay" style="display:none;"></div>
+            </div>
+            <input type="file" id="resumeInput" accept=".pdf,.doc,.docx" style="display:none;" />
+          </div>
+
+          <div class="form-footer-bar">
+            <button type="button" class="btn btn-ghost" onclick="window.location.href='students.html'">Cancel</button>
+            <button type="button" class="btn btn-outline" id="resetFormBtn"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+            <button type="submit" class="btn btn-primary" id="addSubmitBtn"><span class="btn-text"><i class="fa-solid fa-floppy-disk"></i> Save Student</span></button>
+          </div>
+        </div>
+      </form>
+    </main>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script src="dashboard.js"></script>
+<script src="students.js"></script>
+<script src="login.js"></script>
+</body>
+</html>

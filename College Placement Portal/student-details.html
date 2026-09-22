@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Student Details | College Placement Portal</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link rel="stylesheet" href="./style.css" />
+<link rel="stylesheet" href="./auth.css" />
+<link rel="stylesheet" href="./dashboard.css" />
+<link rel="stylesheet" href="./students.css" />
+</head>
+<body>
+
+<div class="page-loader" id="pageLoader"><div class="loader-ring"></div><div class="loader-text">Loading Profile...</div></div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="app-layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-brand"><i class="fa-solid fa-graduation-cap"></i><span>PlaceMentPro</span></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="dashboard.html" data-page="dashboard.html"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <a href="students.html" data-page="students.html" class="active"><i class="fa-solid fa-user-graduate"></i><span>Students</span></a>
+      <a href="#" data-page="companies.html"><i class="fa-solid fa-building"></i><span>Companies</span></a>
+      <a href="#" data-page="jobs.html"><i class="fa-solid fa-briefcase"></i><span>Jobs</span></a>
+      <div class="nav-section-label">Activity</div>
+      <a href="#" data-page="applications.html"><i class="fa-solid fa-file-lines"></i><span>Applications</span></a>
+      <a href="#" data-page="interviews.html"><i class="fa-solid fa-calendar-check"></i><span>Interviews</span></a>
+      <a href="verify-student.html" data-page="verify-student.html"><i class="fa-solid fa-user-check"></i><span>Verify Students</span></a>
+      <div class="nav-section-label">Insights</div>
+      <a href="#" data-page="statistics.html"><i class="fa-solid fa-chart-pie"></i><span>Placement Statistics</span></a>
+      <a href="#" data-page="reports.html"><i class="fa-solid fa-file-export"></i><span>Reports</span></a>
+      <a href="#" data-page="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-footer"><a href="#" data-logout><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a></div>
+  </aside>
+
+  <div class="main-content">
+    <header class="navbar">
+      <div class="navbar-left">
+        <button class="sidebar-toggle-btn" id="sidebarToggleBtn"><i class="fa-solid fa-bars"></i></button>
+        <div class="navbar-search"><i class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="Search students, companies, jobs..." /></div>
+      </div>
+      <div class="navbar-right">
+        <i class="fa-regular fa-moon icon-btn" id="darkModeToggle"></i>
+        <div style="position:relative;">
+          <div class="navbar-profile" data-dropdown-trigger="profileDropdown">
+            <img src="https://i.pravatar.cc/80?img=12" alt="Admin" />
+            <div><div class="profile-name" id="navProfileName">Rajesh Kumar</div><div class="profile-role">Placement Officer</div></div>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="dropdown-menu" id="profileDropdown">
+            <a href="#"><i class="fa-regular fa-user"></i> My Profile</a>
+            <div class="divider"></div>
+            <button data-logout><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-body">
+      <div class="breadcrumb">
+        <a href="dashboard.html">Dashboard</a><i class="fa-solid fa-chevron-right"></i>
+        <a href="students.html">Students</a><i class="fa-solid fa-chevron-right"></i>
+        <span class="current" id="breadcrumbStudentName">Student</span>
+      </div>
+
+      <div id="studentDetailsRoot">
+        <!-- ===== Profile Header ===== -->
+        <div class="card mb-3">
+          <div class="profile-header-card">
+            <div class="profile-photo-wrap"><img id="profilePhoto" src="" alt="Student photo" /></div>
+            <div class="profile-header-info">
+              <h2 id="profileName">Loading...</h2>
+              <div class="reg-no" id="profileRegNo"></div>
+              <div class="profile-header-meta">
+                <span><i class="fa-solid fa-envelope"></i> <span id="profileEmail"></span></span>
+                <span><i class="fa-solid fa-phone"></i> <span id="profilePhone"></span></span>
+                <span><i class="fa-solid fa-star"></i> CGPA <span id="profileCgpa"></span></span>
+              </div>
+              <div class="d-flex gap-1 mt-2">
+                <span id="profileStatusBadge"></span>
+                <span id="profileVerifyBadge"></span>
+              </div>
+            </div>
+            <div class="profile-header-actions">
+              <a href="students.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Back</a>
+              <a href="#" class="btn btn-primary" id="editStudentLink"><i class="fa-solid fa-pen"></i> Edit</a>
+              <button class="btn btn-danger btn-icon" id="deleteStudentBtn" title="Delete Student"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-layout">
+          <div>
+            <!-- Personal & Academic Info -->
+            <div class="card detail-section">
+              <div class="card-header"><h3><i class="fa-solid fa-id-card"></i> Personal Information</h3></div>
+              <div class="card-body">
+                <div class="detail-grid">
+                  <div class="detail-field"><label>Register No <i class="fa-solid fa-pen edit-field-btn"></i></label><div class="value" id="fieldRegNo"></div></div>
+                  <div class="detail-field"><label>Email <i class="fa-solid fa-pen edit-field-btn"></i></label><div class="value" id="fieldEmail"></div></div>
+                  <div class="detail-field"><label>Phone <i class="fa-solid fa-pen edit-field-btn"></i></label><div class="value" id="fieldPhone"></div></div>
+                  <div class="detail-field" style="grid-column: span 3;"><label>Address <i class="fa-solid fa-pen edit-field-btn"></i></label><div class="value" id="fieldAddress"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card detail-section">
+              <div class="card-header"><h3><i class="fa-solid fa-book"></i> Academic Details</h3></div>
+              <div class="card-body">
+                <div class="detail-grid">
+                  <div class="detail-field"><label>Department <i class="fa-solid fa-pen edit-field-btn"></i></label><div class="value" id="fieldDept"></div></div>
+                  <div class="detail-field"><label>Year <i class="fa-solid fa-pen edit-field-btn"></i></label><div class="value" id="fieldYear"></div></div>
+                  <div class="detail-field"><label>CGPA <i class="fa-solid fa-pen edit-field-btn"></i></label><div class="value" id="fieldCgpa"></div></div>
+                  <div class="detail-field"><label>Arrears <i class="fa-solid fa-pen edit-field-btn"></i></label><div class="value" id="fieldArrears"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card detail-section">
+              <div class="card-header"><h3><i class="fa-solid fa-screwdriver-wrench"></i> Skills</h3></div>
+              <div class="card-body"><div class="skills-tags" id="skillsWrap"></div></div>
+            </div>
+
+            <div class="card detail-section">
+              <div class="card-header"><h3><i class="fa-solid fa-diagram-project"></i> Projects</h3></div>
+              <div class="card-body" id="projectsWrap"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card detail-section">
+              <div class="card-header"><h3><i class="fa-solid fa-file-lines"></i> Resume</h3></div>
+              <div class="card-body">
+                <div class="resume-box">
+                  <div class="resume-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                  <div style="flex:1;"><div class="resume-name" id="resumeFileName"></div><div class="resume-meta">PDF Document</div></div>
+                  <button class="btn btn-outline btn-sm" id="downloadResumeBtn"><i class="fa-solid fa-download"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card detail-section">
+              <div class="card-header"><h3><i class="fa-solid fa-award"></i> Placement Eligibility</h3></div>
+              <div class="card-body"><div id="eligibilityBox"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script src="dashboard.js"></script>
+<script src="students.js"></script>
+<script src="login.js"></script>
+</body>
+</html>

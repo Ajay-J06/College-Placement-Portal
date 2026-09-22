@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Students | College Placement Portal</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link rel="stylesheet" href="./style.css" />
+<link rel="stylesheet" href="./auth.css" />
+<link rel="stylesheet" href="./dashboard.css" />
+<link rel="stylesheet" href="./students.css" />
+</head>
+<body>
+
+<div class="page-loader" id="pageLoader"><div class="loader-ring"></div><div class="loader-text">Loading Students...</div></div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="app-layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-brand"><i class="fa-solid fa-graduation-cap"></i><span>PlaceMentPro</span></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="dashboard.html" data-page="dashboard.html"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <a href="students.html" data-page="students.html" class="active"><i class="fa-solid fa-user-graduate"></i><span>Students</span></a>
+      <a href="#" data-page="companies.html"><i class="fa-solid fa-building"></i><span>Companies</span></a>
+      <a href="#" data-page="jobs.html"><i class="fa-solid fa-briefcase"></i><span>Jobs</span></a>
+      <div class="nav-section-label">Activity</div>
+      <a href="#" data-page="applications.html"><i class="fa-solid fa-file-lines"></i><span>Applications</span></a>
+      <a href="#" data-page="interviews.html"><i class="fa-solid fa-calendar-check"></i><span>Interviews</span></a>
+      <a href="verify-student.html" data-page="verify-student.html"><i class="fa-solid fa-user-check"></i><span>Verify Students</span></a>
+      <div class="nav-section-label">Insights</div>
+      <a href="#" data-page="statistics.html"><i class="fa-solid fa-chart-pie"></i><span>Placement Statistics</span></a>
+      <a href="#" data-page="reports.html"><i class="fa-solid fa-file-export"></i><span>Reports</span></a>
+      <a href="#" data-page="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-footer"><a href="#" data-logout><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a></div>
+  </aside>
+
+  <div class="main-content">
+    <header class="navbar">
+      <div class="navbar-left">
+        <button class="sidebar-toggle-btn" id="sidebarToggleBtn"><i class="fa-solid fa-bars"></i></button>
+        <div class="navbar-search"><i class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="Search students, companies, jobs..." /></div>
+      </div>
+      <div class="navbar-right">
+        <i class="fa-regular fa-moon icon-btn" id="darkModeToggle" title="Toggle dark mode"></i>
+        <div style="position:relative;">
+          <div class="icon-btn" data-dropdown-trigger="notifDropdown"><i class="fa-solid fa-bell"></i><span class="badge-dot"></span></div>
+          <div class="dropdown-menu" id="notifDropdown" style="width:300px;">
+            <div class="dropdown-header">Notifications</div>
+            <a href="#" class="notif-item"><div class="notif-icon" style="background:var(--success-bg);color:var(--success);"><i class="fa-solid fa-check"></i></div><div><div class="dropdown-item-title">12 students verified</div><div class="dropdown-item-sub">2 minutes ago</div></div></a>
+          </div>
+        </div>
+        <div style="position:relative;">
+          <div class="navbar-profile" data-dropdown-trigger="profileDropdown">
+            <img src="https://i.pravatar.cc/80?img=12" alt="Admin" />
+            <div><div class="profile-name" id="navProfileName">Rajesh Kumar</div><div class="profile-role">Placement Officer</div></div>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="dropdown-menu" id="profileDropdown">
+            <a href="#"><i class="fa-regular fa-user"></i> My Profile</a>
+            <a href="#"><i class="fa-solid fa-gear"></i> Account Settings</a>
+            <div class="divider"></div>
+            <button data-logout><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-body">
+      <div class="breadcrumb"><a href="dashboard.html">Dashboard</a><i class="fa-solid fa-chevron-right"></i><span class="current">Students</span></div>
+      <div class="page-title-row">
+        <div><h1>Student Management</h1><p class="subtitle">Manage all registered students, their academic profiles and placement status.</p></div>
+        <div class="page-actions">
+          <button class="btn btn-outline" id="exportCsvBtn"><i class="fa-solid fa-file-export"></i> Export CSV</button>
+          <a href="add-student.html" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Add Student</a>
+        </div>
+      </div>
+
+      <div class="mini-stats-grid">
+        <div class="mini-stat-card"><div class="mini-stat-icon" style="background:rgba(37,99,235,0.1);color:var(--primary);"><i class="fa-solid fa-users"></i></div><div><h3>542</h3><span>Total Students</span></div></div>
+        <div class="mini-stat-card"><div class="mini-stat-icon" style="background:var(--success-bg);color:var(--success);"><i class="fa-solid fa-user-check"></i></div><div><h3>456</h3><span>Placed</span></div></div>
+        <div class="mini-stat-card"><div class="mini-stat-icon" style="background:var(--info-bg);color:var(--info);"><i class="fa-solid fa-hourglass-half"></i></div><div><h3>58</h3><span>In Process</span></div></div>
+        <div class="mini-stat-card"><div class="mini-stat-icon" style="background:var(--warning-bg);color:var(--warning);"><i class="fa-solid fa-user-clock"></i></div><div><h3>28</h3><span>Not Placed</span></div></div>
+      </div>
+
+      <div class="card">
+        <div class="list-toolbar">
+          <div class="toolbar-search"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="studentSearchInput" placeholder="Search by name, reg no. or email..." /></div>
+          <div class="toolbar-filters">
+            <select class="form-control" id="deptFilter">
+              <option value="">All Departments</option>
+              <option value="CSE">CSE</option>
+              <option value="ECE">ECE</option>
+              <option value="MECH">MECH</option>
+              <option value="CIVIL">CIVIL</option>
+              <option value="EEE">EEE</option>
+              <option value="IT">IT</option>
+            </select>
+            <select class="form-control" id="statusFilter">
+              <option value="">All Status</option>
+              <option value="placed">Placed</option>
+              <option value="in-progress">In Process</option>
+              <option value="not-placed">Not Placed</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th data-sort="regNo">Register No <i class="fa-solid fa-sort"></i></th>
+                <th data-sort="name">Name <i class="fa-solid fa-sort"></i></th>
+                <th data-sort="department">Department <i class="fa-solid fa-sort"></i></th>
+                <th data-sort="cgpa">CGPA <i class="fa-solid fa-sort"></i></th>
+                <th data-sort="status">Status <i class="fa-solid fa-sort"></i></th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="studentsTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="pagination-bar">
+          <div class="pagination-info" id="studentsCountLabel"></div>
+          <div class="pagination" id="studentsPagination"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script src="dashboard.js"></script>
+<script src="students.js"></script>
+<script src="login.js"></script>
+</body>
+</html>
